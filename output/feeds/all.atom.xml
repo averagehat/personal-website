@@ -5221,4 +5221,48 @@ In [101]:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</summary><category term="Python"></category><category term="pandas"></category><category term="visualization"></category><category term="machine learning"></category></entry></feed>
+&lt;/div&gt;</summary><category term="Python"></category><category term="pandas"></category><category term="visualization"></category><category term="machine learning"></category></entry><entry><title>Resume</title><link href="http://mikep.info.tm/2.html" rel="alternate"></link><updated>2014-09-29T00:00:00+02:00</updated><author><name>Mike Panciera</name></author><id>tag:mikep.info.tm,2014-09-29:2.html</id><summary type="html">&lt;h1&gt;Mike Panciera&lt;/h1&gt;
+&lt;h2&gt;Software Developer&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="bigmwp@gmail.com"&gt;bigmwp@gmail.com&lt;/a&gt;  \
+&lt;a href="mikep.info.tm"&gt;mikep.info.tm&lt;/a&gt; \
+&lt;a href="github.com/averagehat"&gt;github.com/averagehat&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id="technical"&gt;Technical Skills&lt;/h2&gt;
+&lt;p&gt;Python, Java, Unix/Linux, Mongodb, Javascript, Git, Bash, HTML, Eclipse, Meteor, Flask&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id="skills"&gt;Work Experience&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Developer,&lt;/strong&gt; Point 5 Solutions, August 2014 - Present, Seattle WA &lt;/p&gt;
+&lt;p&gt;Developing web services to aggregate social media, text and geospatial data, leveraging Amazon Web Services and MongoDB. Creating a responsive web app for visualization using Meteor, a dynamic full-stack framework built on node.js.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Intern,&lt;/strong&gt; Danville Regional Foundation, Summer 2014, Danville VA &lt;/p&gt;
+&lt;p&gt;Acted as project manager of website and web-aware Android app over a ten-week development cycle. Created SQL database system and custom Content Management System on AWS. Led a series of in-house and community presentations.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id="skills"&gt;Open Source Projects&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Mafia Game&lt;/strong&gt; &lt;a href="www.github.com/averagehat/werewolf"&gt;www.github.com/averagehat/werewolf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Multi-user, real-time “Mafia” game using mobile location and sophisticated Android UI. 
+Python-based RESTful web service and Android App for with Mongodb backend.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Skynet&lt;/strong&gt; &lt;a href="www.github.com/averagehat/GuerillaDNS"&gt;www.github.com/averagehat/GuerillaDNS&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Building an open-source PoC simulating a botnet using
+cloud services, email automation and botting techniques.
+Mongo and Python (Flask) backend deployed on multiple
+cloud services.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Navi&lt;/strong&gt; &lt;a href="goo.gl/TbIuc1"&gt;goo.gl/TbIuc1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Prototype navigation app for the visually impaired built for
+Android phones.
+Featured in William and Mary Alumni Magazine.&lt;/p&gt;
+&lt;h2&gt;Courses&lt;/h2&gt;
+&lt;p&gt;Mobile Cloud Computing I &amp;amp; II (Android, Web Development) Data Structures and Algorithms I &amp;amp; II (Java) \
+Software Development (Java) \
+Simulation ( C  ) \
+Computer Organization ( C  ) \
+Principles of Programming Languages Finite Automata \
+Machine Learning [at &lt;em&gt;Coursera&lt;/em&gt;] (Octave/MATLAB) &lt;/p&gt;
+&lt;h2&gt;Activities&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Debate&lt;/strong&gt; \
+George Washington ‘07-’08, 3rd Novice Speaker \
+Johns Hopkins ‘07-’08, 5th Novice Team&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Creative Writing&lt;/strong&gt; \
+New River Valley Voices Finalist, 2013 \
+Glimmer Train April 2014 Very Short Fiction, Honorable Mention \
+Glenwood Clark Prize in Fiction, 3rd Place \&lt;/p&gt;</summary><category term="personal"></category></entry></feed>
