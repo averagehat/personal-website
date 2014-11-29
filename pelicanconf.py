@@ -20,14 +20,13 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+LINKS = (('Justin Duke', 'http://jmduke.com/' ), )
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = (
+    ('LinkedIn', 'http://www.linkedin.com/pub/mike-panciera/39/938/a52' ),
+    ('GitHub', 'https://github.com/averagehat' ), 
+    )
 
 DEFAULT_PAGINATION = 5
 
