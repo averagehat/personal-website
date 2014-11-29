@@ -12,9 +12,6 @@ from pelicanconf import *
 
 SITEURL = 'http://mikep.info.tm'
 
-#Set to true fixes the ".html" hrefs in one of the posts. possibly SITEURL is not set correctly?
-# https://github.com/getpelican/pelican/issues/1526
-RELATIVE_URLS = True
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'

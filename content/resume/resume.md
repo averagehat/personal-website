@@ -2,15 +2,17 @@ Title: Resume
 Slug:  2
 Date:  September 2014
 Category: Resume
-Tags: 
+Tags:
 Author: Mike Panciera
-Summary: 
+Summary:
+
+
 # Mike Panciera
 ## Software Developer
 
-> [bigmwp@gmail.com](bigmwp@gmail.com)  <br>
-> [mikep.info.tm](mikep.info.tm) <br>
-> [github.com/averagehat](github.com/averagehat)
+> bigmwp@gmail.com  <br>
+> mikep.info.tm <br>
+> github.com/averagehat
 
 ------
 
@@ -34,19 +36,19 @@ Acted as project manager of website and web-aware Android app over a ten-week de
 
 ## Open Source Projects {#skills}
 
-**Mafia Game** [www.github.com/averagehat/werewolf](www.github.com/averagehat/werewolf)
+**Mafia Game** (www.github.com/averagehat/werewolf)
 
 Multi-user, real-time “Mafia” game using mobile location and sophisticated Android UI. 
 Python-based RESTful web service and Android App for with Mongodb backend.
 
-__Skynet__ [www.github.com/averagehat/GuerillaDNS](www.github.com/averagehat/GuerillaDNS)
+__Skynet__ (www.github.com/averagehat/GuerillaDNS)
 
 Building an open-source PoC simulating a botnet using
 cloud services, email automation and botting techniques.
 Mongo and Python (Flask) backend deployed on multiple
 cloud services.
 
-__Navi__ [goo.gl/TbIuc1](goo.gl/TbIuc1)
+__Navi__ (goo.gl/TbIuc1)
 
 Prototype navigation app for the visually impaired built for
 Android phones.

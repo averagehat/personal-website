@@ -31,8 +31,9 @@ SOCIAL = (
 DEFAULT_PAGINATION = 5
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
-
+#Set to true fixes the ".html" hrefs in one of the posts. possibly SITEURL is not set correctly?
+# https://github.com/getpelican/pelican/issues/1526
+#RELATIVE_URLS = False
 
 # for ipynb plugin (from https://github.com/danielfrg/pelican-ipynb)
 MARKUP = ('md', 'ipynb')
