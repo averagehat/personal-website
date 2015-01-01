@@ -60,7 +60,6 @@ Software Development (Java) <br>
 Simulation ( C  ) <br>
 Computer Organization ( C  ) <br>
 Principles of Programming Languages Finite Automata <br>
-Machine Learning [at *Coursera*] (Octave/MATLAB) 
 
 ## Activities
 

@@ -195,7 +195,7 @@ class IPythonNB(BaseReader):
                 del metadata[key]
                 key = key.lower()
                 metadata[key] = self.process_metadata(key, value)
-            metadata['ipython'] = True
+        metadata['ipython'] = True
 
         # Convert ipython notebook to html
         config = Config({'CSSHTMLHeaderTransformer': {'enabled': True,
@@ -234,7 +234,7 @@ class IPythonNB(BaseReader):
             return '<style type=\"text/css\">{0}</style>'.format(ans)
 
         css = '\n'.join(filter_tags(css) for css in info['inlining']['css'])
-        css = css + CUSTOM_CSS
+        css = CUSTOM_CSS + css
         body = css + body
 
         return body, metadata

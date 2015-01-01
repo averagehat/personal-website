@@ -1,3 +1,7 @@
 *.pyc
 *~
 output/
+*.png
+*.html
+*.bak
+.DS_*

@@ -1,5 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mike Panciera</title><link href="http://mikep.info.tm/" rel="alternate"></link><link href="http://mikep.info.tm/feeds/all.atom.xml" rel="self"></link><id>http://mikep.info.tm/</id><updated>2014-11-29T00:00:00+01:00</updated><entry><title>Quick Linux PenLab Setup</title><link href="http://mikep.info.tm/12.html" rel="alternate"></link><updated>2014-11-29T00:00:00+01:00</updated><author><name>Mike Panciera</name></author><id>tag:mikep.info.tm,2014-11-29:12.html</id><summary type="html">&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mike Panciera</title><link href="http://mikep.info.tm/" rel="alternate"></link><link href="http://mikep.info.tm/feeds/all.atom.xml" rel="self"></link><id>http://mikep.info.tm/</id><updated>2015-01-01T00:00:00+01:00</updated><entry><title>Vim Script 101</title><link href="http://mikep.info.tm/999.html" rel="alternate"></link><updated>2015-01-01T00:00:00+01:00</updated><author><name>Mike Panciera</name></author><id>tag:mikep.info.tm,2015-01-01:999.html</id><summary type="html">&lt;p&gt;I'm currently working on &lt;a href="https://github.com/averagehat/phonim-jython"&gt;a plugin for vim&lt;/a&gt;. Along the way I've discovered a lot of intersting and useful productivity tricks. &lt;/p&gt;
+&lt;h3&gt;Defining functions&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   &lt;span class="k"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; Foo&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="c"&gt;   &amp;quot; function body&lt;/span&gt;
+   &lt;span class="k"&gt;endfun&lt;/span&gt;
+
+   &lt;span class="k"&gt;function&lt;/span&gt; Foo&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="c"&gt;   &amp;quot; function body&lt;/span&gt;
+   &lt;span class="k"&gt;endfunction&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create functions within the command window by putting each statement on a new line. i.e.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="k"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; Foo&lt;span class="p"&gt;()&lt;/span&gt; [&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;]
+   :  second line
+   : . . . . . 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Execute them from the commandline window:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="k"&gt;call&lt;/span&gt; Foo&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Variables have several possible scopes:
+&lt;code&gt;l&lt;/code&gt; (local to function), &lt;code&gt;s&lt;/code&gt; (local to individual scripts/files), &lt;code&gt;g&lt;/code&gt; (global), &lt;code&gt;a&lt;/code&gt; (a function parameter). &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;v&lt;/code&gt; is a global like &lt;code&gt;g&lt;/code&gt;, but has been predefined by vim. These cannot be defined by the user.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;b&lt;/code&gt; (local to current buffer), &lt;code&gt;w&lt;/code&gt; (local to the current winow) and &lt;code&gt;t&lt;/code&gt; (local to current tab)  are less often used.&lt;/p&gt;
+&lt;p&gt;View defined variables:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="k"&gt;g&lt;/span&gt;:  &lt;span class="c"&gt;&amp;quot;or v:, b:, etcl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;By the way, we can use &lt;code&gt;"&lt;/code&gt; for comments&lt;/p&gt;
+&lt;p&gt;View register contents:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="k"&gt;reg&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Variables are defined using let, e.g.:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt; &lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="k"&gt;l&lt;/span&gt;:bar &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Variables defined or accessed within a function are by default in the local scope. Prepending with &lt;code&gt;g:&lt;/code&gt; allows access to global variables.&lt;/p&gt;
+&lt;p&gt;Arrays are much like python lists. They are type-agnostic and can be sliced.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="k"&gt;l&lt;/span&gt;:&lt;span class="k"&gt;a&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; [&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;]
+   :echo &lt;span class="k"&gt;a&lt;/span&gt;[&lt;span class="m"&gt;2&lt;/span&gt;:&lt;span class="m"&gt;-1&lt;/span&gt;]` &lt;span class="c"&gt;&amp;quot;prints [&amp;#39;foo&amp;#39;, &amp;#39;bar&amp;#39;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Strings can also be sliced withe same syntax.&lt;/p&gt;
+&lt;p&gt;String concatenation is php style:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="k"&gt;g&lt;/span&gt;:pair &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;eight&amp;#39;&lt;/span&gt; . &lt;span class="s1"&gt;&amp;#39;eight&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Directly access the command line:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="p"&gt;!&lt;/span&gt;echo &lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;e&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;bash\nis\nfun&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="k"&gt;cat&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt; bar.txt 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Read files into the buffer:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="k"&gt;r&lt;/span&gt; bar.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Produces:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;bash
+is
+fun
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Under your cursor.&lt;/p&gt;
+&lt;p&gt;Read command outputs into the buffer:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="k"&gt;r&lt;/span&gt; &lt;span class="p"&gt;!&lt;/span&gt;curl &lt;span class="p"&gt;-&lt;/span&gt;s icanhazip.&lt;span class="k"&gt;com&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If your distribution of vim is compiled with python included (and it usually is) you can also access a python interpreter during your editing session.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;ni!&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can access vim from the internal python interpreter.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;vim&lt;/span&gt;
+   &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;vim&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Just answer the five (three!) questions&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can go crazy with it if you like . . . &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;lxml.etree&lt;/span&gt;
+   &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lxml&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;etree&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;https://twitter.com/montypython&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;redir&lt;/span&gt; &lt;span class="nd"&gt;@i&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;exe&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;:silent py for t in  root.xpath(&amp;quot;//p[contains(@class, &lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;ProfileTweet-text&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;)]/text()&amp;quot;): print t.encode(&amp;quot;utf8&amp;quot;)&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;redir&lt;/span&gt; &lt;span class="n"&gt;END&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;put&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here, &lt;code&gt;:redir&lt;/code&gt; redirects output of the commands between &lt;code&gt;:redir&lt;/code&gt; and &lt;code&gt;:redir END&lt;/code&gt; (which would usually be printed in the command window) to some register. Vim has 26+ register (all alphabetical letters and additional reserved registers). &lt;code&gt;@i&lt;/code&gt; accesses the value at register &lt;code&gt;i&lt;/code&gt;, telling vim to pipe output there. &lt;code&gt;|&lt;/code&gt; stands in place of &lt;code&gt;&amp;lt;CR&amp;gt;&lt;/code&gt; to separate commands. &lt;code&gt;exe&lt;/code&gt; executes the given command as if it were in the command. We can use it when we need to make a command out of concatenating strings. In this case, it lets us wrap the python code in '' so that python does not try to interpret the next &lt;code&gt;|&lt;/code&gt;. &lt;code&gt;silent&lt;/code&gt; tells vim not to echo the result of the command in the command window. &lt;code&gt;redir END&lt;/code&gt; will populate our register &lt;code&gt;i&lt;/code&gt; -- it won't get updated until the redirect is finished. Finally, we execute &lt;code&gt;put i&lt;/code&gt;, which inserts the contents of register &lt;code&gt;i&lt;/code&gt; after the cursor's current line. The &lt;code&gt;$&lt;/code&gt; (which generally indecates "last") tells put to instead append to the last line of the buffer.&lt;/p&gt;
+&lt;p&gt;There are some useful global variables&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;v&lt;/span&gt;:statusmsg    &lt;span class="c"&gt;&amp;quot;usually holds the last item shown in the command window      &lt;/span&gt;
+&lt;span class="k"&gt;v&lt;/span&gt;:warningmsg   &lt;span class="k"&gt;e&lt;/span&gt;.&lt;span class="k"&gt;g&lt;/span&gt;. W10: Warning: Changing &lt;span class="k"&gt;a&lt;/span&gt; &lt;span class="nb"&gt;readonly&lt;/span&gt; &lt;span class="k"&gt;file&lt;/span&gt;
+&lt;span class="k"&gt;v&lt;/span&gt;:errmsg       &lt;span class="k"&gt;e&lt;/span&gt;.&lt;span class="k"&gt;g&lt;/span&gt;. E488: Trailing characters: &lt;span class="k"&gt;put&lt;/span&gt; &lt;span class="k"&gt;v&lt;/span&gt;:errmsg
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Useful Motions (normal mode)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;command    goes &lt;span class="k"&gt;to&lt;/span&gt;
+`&lt;span class="k"&gt;f&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;char&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;` next instance of &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;char&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+`&lt;span class="p"&gt;)&lt;/span&gt;`       &lt;span class="k"&gt;end&lt;/span&gt; of setnece
+`%`       matching parens/brace
+`$`       &lt;span class="k"&gt;end&lt;/span&gt; of line
+`G`       &lt;span class="k"&gt;end&lt;/span&gt; of &lt;span class="k"&gt;file&lt;/span&gt;
+`}`       next paragraph
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Additionally, we have &lt;code&gt;visual&lt;/code&gt; mode. A quick preview of that:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;C&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;v&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;  &lt;span class="c"&gt;&amp;quot;To select columns. Any change propagates to all columns.&lt;/span&gt;
+   :&lt;span class="k"&gt;vs&lt;/span&gt; [filename] &lt;span class="c"&gt;&amp;quot;split vertical window&lt;/span&gt;
+   :split [filename] &lt;span class="c"&gt;&amp;quot;split horizontally&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-w&amp;gt;&lt;/code&gt; Is the window command suffix, so &lt;code&gt;&amp;lt;C-w&amp;gt; h&lt;/code&gt; moves to the left widnow, &lt;code&gt;&amp;lt;C-w&amp;gt; l&lt;/code&gt; to the right, &lt;code&gt;&amp;lt;C-w&amp;gt; k&lt;/code&gt; moves to the upper window and &lt;code&gt;&amp;lt;C-w&amp;gt; j&lt;/code&gt; moves to the lower one. I have the following mapping which forces this to work straight out of insert mode:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="nb"&gt;inoremap&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;C&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;w&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Esc&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;C&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;w&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;&amp;lt;Esc&amp;gt;&lt;/code&gt; exits to nromal mode. So does &lt;code&gt;&amp;lt;C-[&amp;gt;&lt;/code&gt;; we can map the tab key to do it as well:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :imap &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;tab&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Esc&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So what can we do with all this? Well, we have lots of useful variables, lots of registers, and marks, and even [ communication protocol for controlling external processes] (http://vimdoc.sourceforge.net/htmldoc/netbeans.html). My next post will be about the project that most of this study has been devoted to. For now, I'll go over a few of my personal settings and one trick that is a bit obscure but extremely powerful.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="nb"&gt;noremap&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;C&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;d&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; :&lt;span class="k"&gt;call&lt;/span&gt; search&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;def\s\s*(&amp;#39;&lt;/span&gt; . expand&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;cword&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;search&lt;/code&gt; function takes a string (remember that &lt;code&gt;.&lt;/code&gt; performs string concatenation), searches the buffer for the regular expression, and moves the cursor to the the line of the found string. &lt;code&gt;search&lt;/code&gt; returns the line of the found match, or &lt;code&gt;0&lt;/code&gt; if no match was found (vim counts its buffer line from &lt;code&gt;1&lt;/code&gt;). &lt;code&gt;&amp;lt;cword&amp;gt;&lt;/code&gt; is an "Ex special character" (try &lt;code&gt;:h cmdline-special&lt;/code&gt;). The &lt;code&gt;expand&lt;/code&gt; function returns the special meaning of &lt;code&gt;&amp;lt;cword&amp;gt;&lt;/code&gt;, which happens to be the current word under the cursor. So if the word under my cursor is "print_lines", search will be called on &lt;code&gt;def\s+print_line(&lt;/code&gt;. So this obscure little function will take you to the function definiton of whatever function you're currently hovering over. IF it's in the file. But what if it's not? Let's try a function. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; DefSearch&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="k"&gt;l&lt;/span&gt;:regex &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;def\s\s*(&amp;#39;&lt;/span&gt; . expand&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;cword&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; search&lt;span class="p"&gt;(&lt;/span&gt;regex&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;   &lt;span class="c"&gt;&amp;quot; search failed&lt;/span&gt;
+    &lt;span class="k"&gt;silent&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;grep -E &amp;quot;&amp;#39;&lt;/span&gt;  . regex . &lt;span class="s1"&gt;&amp;#39;&amp;quot; *.py&amp;#39;&lt;/span&gt;
+  &lt;span class="k"&gt;endif&lt;/span&gt;
+&lt;span class="k"&gt;endfun&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;VimL's functions execute their code as if from the command-line (in vim, as if you prepended them with &lt;code&gt;:&lt;/code&gt;). So &lt;code&gt;silent&lt;/code&gt; &lt;code&gt;executes&lt;/code&gt; the following command without echoing in the command window. It then execute's vim's built-in grep (which is a wrapper around bash's grep). grep's &lt;code&gt;E&lt;/code&gt; allows you to use quote-wrapped regular expressions; -r forces a recursive search, if you like it. &lt;code&gt;*.py&lt;/code&gt; will match any python files. Let's map it!
+Food()&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :&lt;span class="nb"&gt;noremap&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;C&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;d&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; :&lt;span class="k"&gt;call&lt;/span&gt; DefSearch&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;But it's only useful if we're editing or reading a python file . . . we probably don't want to use it otherwise. So in the &lt;code&gt;.vimrc&lt;/code&gt; file, we add:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;au&lt;/span&gt; BufREadPost *.&lt;span class="k"&gt;py&lt;/span&gt; :&lt;span class="nb"&gt;noremap&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;C&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;d&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; :&lt;span class="k"&gt;call&lt;/span&gt; DefSearch&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Testing all this can be a bit of a drag, but as we are editing a vim script (or our .vimrc file) we can immmediately run it (and gain access to its globally-declared variables and functions) by calling &lt;code&gt;:source&lt;/code&gt;. We can take advantage of anther "cmd-line-special" &lt;code&gt;%&lt;/code&gt;, which in the command-line has the value of the current buffer name.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :source %
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Okay, one last trick. This one is real nifty. Info on it is in vim's extensive in-house documentation--just try &lt;code&gt;:h g@&lt;/code&gt;. This trick allows you to capture user motions and reference them within a function. We do this by setting an 'operatorfunc' option. The result is a custom operator. Given a function Foo:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;   :nmap &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;silent&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;F4&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; :&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nb"&gt;opfunc&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;Echo&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="k"&gt;g&lt;/span&gt;@
+   :vmap &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;silent&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;F4&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; :&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;C&lt;span class="p"&gt;-&lt;/span&gt;U&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="k"&gt;call&lt;/span&gt; Echo&lt;span class="p"&gt;(&lt;/span&gt;visualmode&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note: &lt;code&gt;:vmap&lt;/code&gt; is the equivalent of &lt;code&gt;:nmap&lt;/code&gt; for visual mode. The function defition:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;&amp;quot; uses [/] marks along with visual mode to yank a custom selection of text.&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; Echo&lt;span class="p"&gt;(&lt;/span&gt;type&lt;span class="p"&gt;,&lt;/span&gt; ...&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c"&gt;  &amp;quot;backticks=&amp;#39; (goto mark), have to avoid out-quoting string&lt;/span&gt;
+&lt;span class="c"&gt;  &amp;quot;clear the @q register for use in this function.&lt;/span&gt;
+&lt;span class="c"&gt;  &amp;quot;@q is the reserved phonim register.&lt;/span&gt;
+  &lt;span class="k"&gt;let&lt;/span&gt; @&lt;span class="k"&gt;q&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="c"&gt;  &amp;quot; see :h g@ for more info and how to save and restore a register, which&lt;/span&gt;
+&lt;span class="c"&gt;  &amp;quot; would allow us to use &amp;#39;q&amp;#39; only temporarily and then restore it &lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="k"&gt;a&lt;/span&gt;:&lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="c"&gt;&amp;quot; Invoked from Visual mode, use &amp;#39;&amp;lt; and &amp;#39;&amp;gt; marks.&lt;/span&gt;
+    &lt;span class="k"&gt;silent&lt;/span&gt; exe &lt;span class="s2"&gt;&amp;quot;normal! `&amp;lt;&amp;quot;&lt;/span&gt; . &lt;span class="k"&gt;a&lt;/span&gt;:type . &lt;span class="s1"&gt;&amp;#39;`&amp;gt;&amp;quot;qy&amp;#39;&lt;/span&gt;
+  &lt;span class="k"&gt;elseif&lt;/span&gt; &lt;span class="k"&gt;a&lt;/span&gt;:type &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;line&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;silent&lt;/span&gt; exe &lt;span class="s1"&gt;&amp;#39;normal! `[V`]&amp;quot;qy&amp;#39;&lt;/span&gt;
+  &lt;span class="k"&gt;elseif&lt;/span&gt; &lt;span class="k"&gt;a&lt;/span&gt;:type &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;block&amp;#39;&lt;/span&gt; &lt;span class="c"&gt;&amp;quot; column (&amp;#39;block&amp;#39;) selection. &lt;/span&gt;
+    &lt;span class="k"&gt;silent&lt;/span&gt; exe &lt;span class="s1"&gt;&amp;#39;normal! `[\&amp;lt;C-V&amp;gt;`]&amp;quot;qy&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;  &amp;quot;v -&amp;gt; visual mode but stay in-line&lt;/span&gt;
+  &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="c"&gt;&amp;quot; Stay in-line&lt;/span&gt;
+    &lt;span class="k"&gt;silent&lt;/span&gt; exe &lt;span class="s1"&gt;&amp;#39;normal! `[v`]&amp;quot;qy&amp;#39;&lt;/span&gt;  
+  &lt;span class="k"&gt;endif&lt;/span&gt;
+  echo @&lt;span class="k"&gt;q&lt;/span&gt;
+&lt;span class="k"&gt;endfun&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This function echos into the command-window any text that the user selects. It saves the user's selection in the &lt;code&gt;q&lt;/code&gt; register (could be any letter). It is possible to store and restore this register so as not to lose its original contents.  Now &lt;code&gt;:normal&lt;/code&gt; executes normal-mode commands, and will use any mappings that we defined by &lt;code&gt;nmap&lt;/code&gt;. &lt;code&gt;:normal!&lt;/code&gt; overrides this use of mapping.  The &lt;code&gt;opfunc&lt;/code&gt; works by setting &lt;code&gt;[&lt;/code&gt; and &lt;code&gt;]&lt;/code&gt; marks to the beginning and end of the user motiton (i.e. to the next whitespace if it is &lt;code&gt;W&lt;/code&gt; or the next like if it is &lt;code&gt;j&lt;/code&gt;). The &lt;code&gt;Echo&lt;/code&gt; function simply yanks the text between these two marks and stores them in the &lt;code&gt;q&lt;/code&gt; register. We can then do whatever we like with the text, in this case echo it. The if statements gaurantee that the selection will work the same in visual and normal mode (&lt;code&gt;v&lt;/code&gt; is for inline visual selection; &lt;code&gt;V&lt;/code&gt; is for column or "block" selection). &lt;/p&gt;
+&lt;p&gt;In my next post I'll talk about an interesting application of this last technique--and VimL in general, and the reasoning behind all this research.&lt;/p&gt;</summary><category term=""></category></entry><entry><title>Resume</title><link href="http://mikep.info.tm/88.html" rel="alternate"></link><updated>2014-12-01T00:00:00+01:00</updated><author><name>Mike Panciera</name></author><id>tag:mikep.info.tm,2014-12-01:88.html</id><summary type="html">&lt;h1&gt;Mike Panciera&lt;/h1&gt;
+&lt;h2&gt;Software Developer&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="bigmwp@gmail.com"&gt;bigmwp@gmail.com&lt;/a&gt;  &lt;br&gt;
+&lt;a href="mikep.info.tm"&gt;mikep.info.tm&lt;/a&gt; &lt;br&gt;
+&lt;a href="github.com/averagehat"&gt;github.com/averagehat&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2 id="technical"&gt;Technical Skills&lt;/h2&gt;
+&lt;p&gt;Python, Java, Unix/Linux, Mongodb, Javascript, Git, Bash, HTML, Android, Eclipse, Meteor, Flask&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id="skills"&gt;Work Experience&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Developer,&lt;/strong&gt; Point 5 Solutions, August 2014 - Present, Seattle WA &lt;/p&gt;
+&lt;p&gt;Developing web services to aggregate social media, text and geospatial data, leveraging Amazon Web Services and MongoDB. Creating a responsive web app for visualization using Meteor, a dynamic full-stack framework built on node.js.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Intern,&lt;/strong&gt; Danville Regional Foundation, Summer 2014, Danville VA &lt;/p&gt;
+&lt;p&gt;Acted as project manager of website and web-aware Android app written in Java over a ten-week development cycle. Created a custom Content Management System using Python and SQL hosted on AWS. Led a series of in-house and community presentations.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id="skills"&gt;Other Projects&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Mafia&lt;/strong&gt; &lt;a href="www.github.com/averagehat/werewolf"&gt;www.github.com/averagehat/werewolf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Multi-user, real-time “Mafia” game using mobile location and sophisticated Android UI. 
+Python-based RESTful web service and Mongodb backend; client app written in Java.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Skynet&lt;/strong&gt; &lt;a href="www.github.com/averagehat/GuerillaDNS"&gt;www.github.com/averagehat/GuerillaDNS&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Building an open-source PoC simulating a botnet using
+cloud services, email automation and botting techniques.
+Mongo and Python (Flask) backend deployed on multiple
+cloud services.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Navi&lt;/strong&gt; &lt;a href="goo.gl/TbIuc1"&gt;goo.gl/TbIuc1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Prototype navigation app for the visually impaired written in Java for
+Android phones.
+Featured in William and Mary Alumni Magazine.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Simple GIS System&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Built a simple geographic database with data from USGS.
+Implemented a hash table, buffer pool and efficient geographic search in Java.&lt;/p&gt;
+&lt;h2&gt;Education&lt;/h2&gt;
+&lt;h3&gt;Bachelor of Science 2014&lt;/h3&gt;
+&lt;p&gt;Computer Science, College of William and Mary&lt;/p&gt;
+&lt;h3&gt;Courses&lt;/h3&gt;
+&lt;p&gt;Mobile Cloud Computing I &amp;amp; II (Android, Java, Web Development)&lt;br&gt;
+Data Structures and Algorithms I &amp;amp; II (Java) &lt;br&gt;
+Software Development (Java) &lt;br&gt;
+Simulation ( C  ) &lt;br&gt;
+Computer Organization ( C  ) &lt;br&gt;
+Principles of Programming Languages &lt;br&gt;
+Finite Automata &lt;/p&gt;
+&lt;h2&gt;Activities&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Debate&lt;/strong&gt; &lt;br&gt;
+George Washington ‘07-’08, 3rd Novice Speaker &lt;br&gt;
+Johns Hopkins ‘07-’08, 5th Novice Team&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Creative Writing&lt;/strong&gt; &lt;br&gt;
+New River Valley Voices Finalist, 2013 &lt;br&gt;
+Glimmer Train April 2014 Very Short Fiction, Honorable Mention &lt;br&gt;
+Glenwood Clark Prize in Fiction, 3rd Place &lt;br&gt;&lt;/p&gt;</summary><category term=""></category></entry><entry><title>Quick Linux PenLab Setup</title><link href="http://mikep.info.tm/12.html" rel="alternate"></link><updated>2014-11-01T00:00:00+01:00</updated><author><name>Mike Panciera</name></author><id>tag:mikep.info.tm,2014-11-01:12.html</id><summary type="html">
+&lt;style type="text/css"&gt;
+
+/* General text, input and output cells */
+div.cell {
+    border: none;
+}
+
+.inner_cell {
+    width: 100%
+}
+
+.text_cell .prompt {
+    display: none;
+}
+
+div.cell {
+    margin: 0;
+    padding: 0;
+}
+
+div.input_area {
+    border: none;
+    background: none;
+    margin-left: 6px;
+}
+
+div.output_subarea {
+    padding: 0;
+}
+
+pre.ipynb {
+    padding: 5px 5px 5px 10px;
+}
+
+/* DataFrame */
+table.dataframe {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+table.dataframe th, td {
+    padding: 4px;
+    text-align: left;
+}
+
+&lt;/style&gt;
+&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
 .clearfix:after{clear:both}
 .hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0}
 .input-block-level{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
@@ -1423,54 +1718,6 @@ span#checkpoint_status,span#autosave_status{font-size:small}
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
-&lt;style type="text/css"&gt;
-
-/* General text, input and output cells */
-div.cell {
-    border: none;
-}
-
-.inner_cell {
-    width: 100%
-}
-
-.text_cell .prompt {
-    display: none;
-}
-
-div.cell {
-    margin: 0;
-    padding: 0;
-}
-
-div.input_area {
-    border: none;
-    background: none;
-    margin-left: 6px;
-}
-
-div.output_subarea {
-    padding: 0;
-}
-
-pre.ipynb {
-    padding: 5px 5px 5px 10px;
-}
-
-/* DataFrame */
-table.dataframe {
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    line-height: 20px;
-}
-
-table.dataframe th, td {
-    padding: 4px;
-    text-align: left;
-}
-
-&lt;/style&gt;
-
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -1763,7 +2010,55 @@ In []:
 &lt;img src="../images/xamppscreens/mainpage.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</summary><category term="LAMP"></category><category term="Ubuntu"></category><category term="security"></category><category term="penetration testing"></category></entry><entry><title>CSV Parsing in Pandas</title><link href="http://mikep.info.tm/32.html" rel="alternate"></link><updated>2014-10-29T00:00:00+01:00</updated><author><name>Mike Panciera</name></author><id>tag:mikep.info.tm,2014-10-29:32.html</id><summary type="html">&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
+&lt;/div&gt;</summary><category term="LAMP"></category><category term="Ubuntu"></category><category term="security"></category><category term="penetration testing"></category></entry><entry><title>CSV Parsing in Pandas</title><link href="http://mikep.info.tm/32.html" rel="alternate"></link><updated>2014-10-01T00:00:00+02:00</updated><author><name>Mike Panciera</name></author><id>tag:mikep.info.tm,2014-10-01:32.html</id><summary type="html">
+&lt;style type="text/css"&gt;
+
+/* General text, input and output cells */
+div.cell {
+    border: none;
+}
+
+.inner_cell {
+    width: 100%
+}
+
+.text_cell .prompt {
+    display: none;
+}
+
+div.cell {
+    margin: 0;
+    padding: 0;
+}
+
+div.input_area {
+    border: none;
+    background: none;
+    margin-left: 6px;
+}
+
+div.output_subarea {
+    padding: 0;
+}
+
+pre.ipynb {
+    padding: 5px 5px 5px 10px;
+}
+
+/* DataFrame */
+table.dataframe {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+table.dataframe th, td {
+    padding: 4px;
+    text-align: left;
+}
+
+&lt;/style&gt;
+&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
 .clearfix:after{clear:both}
 .hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0}
 .input-block-level{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
@@ -3187,54 +3482,6 @@ span#checkpoint_status,span#autosave_status{font-size:small}
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
-&lt;style type="text/css"&gt;
-
-/* General text, input and output cells */
-div.cell {
-    border: none;
-}
-
-.inner_cell {
-    width: 100%
-}
-
-.text_cell .prompt {
-    display: none;
-}
-
-div.cell {
-    margin: 0;
-    padding: 0;
-}
-
-div.input_area {
-    border: none;
-    background: none;
-    margin-left: 6px;
-}
-
-div.output_subarea {
-    padding: 0;
-}
-
-pre.ipynb {
-    padding: 5px 5px 5px 10px;
-}
-
-/* DataFrame */
-table.dataframe {
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    line-height: 20px;
-}
-
-table.dataframe th, td {
-    padding: 4px;
-    text-align: left;
-}
-
-&lt;/style&gt;
-
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
 &lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
@@ -5221,7 +5468,7 @@ In [101]:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</summary><category term="Python"></category><category term="pandas"></category><category term="visualization"></category><category term="machine learning"></category></entry><entry><title>Resume</title><link href="http://mikep.info.tm/2.html" rel="alternate"></link><updated>2014-09-29T00:00:00+02:00</updated><author><name>Mike Panciera</name></author><id>tag:mikep.info.tm,2014-09-29:2.html</id><summary type="html">&lt;h1&gt;Mike Panciera&lt;/h1&gt;
+&lt;/div&gt;</summary><category term="Python"></category><category term="pandas"></category><category term="visualization"></category><category term="machine learning"></category></entry><entry><title>Resume</title><link href="http://mikep.info.tm/2.html" rel="alternate"></link><updated>2014-09-01T00:00:00+02:00</updated><author><name>Mike Panciera</name></author><id>tag:mikep.info.tm,2014-09-01:2.html</id><summary type="html">&lt;h1&gt;Mike Panciera&lt;/h1&gt;
 &lt;h2&gt;Software Developer&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;bigmwp@gmail.com  &lt;br&gt;
@@ -5256,8 +5503,7 @@ Featured in William and Mary Alumni Magazine.&lt;/p&gt;
 Software Development (Java) &lt;br&gt;
 Simulation ( C  ) &lt;br&gt;
 Computer Organization ( C  ) &lt;br&gt;
-Principles of Programming Languages Finite Automata &lt;br&gt;
-Machine Learning [at &lt;em&gt;Coursera&lt;/em&gt;] (Octave/MATLAB) &lt;/p&gt;
+Principles of Programming Languages Finite Automata &lt;br&gt;&lt;/p&gt;
 &lt;h2&gt;Activities&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Debate&lt;/strong&gt; &lt;br&gt;
 George Washington ‘07-’08, 3rd Novice Speaker &lt;br&gt;

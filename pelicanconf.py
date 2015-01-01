@@ -36,10 +36,9 @@ DEFAULT_PAGINATION = 5
 #RELATIVE_URLS = False
 
 # for ipynb plugin (from https://github.com/danielfrg/pelican-ipynb)
+
 MARKUP = ('md', 'ipynb')
-
-PLUGIN_PATH = './plugins'
 PLUGINS = ['ipynb']
-
-
-
+PLUGIN_PATH = './plugins'
+STATIC_PATHS = ['images', 'extra/favicon.ico']
+EXTRA_PATH_METADATA = { 'extra/favicon.ico': {'path': 'favicon.ico'} }
